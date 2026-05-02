@@ -1,0 +1,115 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --space-0:   #05070D;
+  --space-1:   #0A0E1A;
+  --space-2:   #111726;
+  --space-3:   #1A2238;
+  --space-4:   #232D47;
+  --space-5:   #35406A;
+
+  --lunar-0:   #FFFFFF;
+  --lunar-1:   #F7F8FB;
+  --lunar-2:   #EEF0F5;
+  --lunar-3:   #DDE1EB;
+  --lunar-4:   #B8BFCF;
+  --lunar-5:   #7F8699;
+  --lunar-6:   #4A5167;
+  --lunar-7:   #1A2238;
+
+  --signal-50:  #EBF5FF;
+  --signal-100: #D6EBFF;
+  --signal-200: #A6D4FF;
+  --signal-300: #74BBFC;
+  --signal-400: #4DA6F5;
+  --signal-500: #2E8EE6;
+  --signal-600: #1E6DBF;
+  --signal-700: #15518F;
+
+  --amber-300: #F5B83E;
+  --amber-500: #D99416;
+
+  --ok:        #3FBF7F;
+  --ok-bg:     #E5F7ED;
+  --warn:      #F5B83E;
+  --warn-bg:   #FFF4DA;
+  --danger:    #E25555;
+  --danger-bg: #FCE8E8;
+
+  --cat-use-ai:          #4DA6F5;
+  --cat-code-with-ai:    #8B7DD9;
+  --cat-ml-fundamentals: #3FBF7F;
+  --cat-deep-learning:   #E57A7A;
+  --cat-data-science:    #4DC4D1;
+  --cat-ai-tools:        #F5B83E;
+  --cat-agents:          #D97BB8;
+  --cat-ethics-ai:       #8B99B8;
+
+  --bg:          var(--space-1);
+  --bg-elev:     var(--space-2);
+  --bg-card:     var(--space-3);
+  --border:      var(--space-4);
+  --border-strong: var(--space-5);
+  --fg:          var(--lunar-1);
+  --fg-muted:    var(--lunar-4);
+  --fg-subtle:   var(--lunar-5);
+  --accent:      var(--signal-400);
+  --accent-hover: var(--signal-300);
+  --accent-press: var(--signal-500);
+
+  --font-display: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
+  --font-body:    'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-mono:    'JetBrains Mono', ui-monospace, monospace;
+
+  --r-sm: 4px; --r-md: 8px; --r-lg: 12px; --r-xl: 16px; --r-full: 999px;
+  --shadow-dark-md: 0 4px 24px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.04);
+  --glow-signal: 0 0 0 3px rgba(77,166,245,0.20);
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur-fast: 120ms; --dur-base: 200ms;
+}
+
+
+html, body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  transition: background 200ms, color 200ms;
+}
+
+/* Design system utility classes */
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--signal-300);
+}
+
+.cc-tag { display: inline-flex; padding: 3px 8px; border-radius: 4px; font-family: var(--font-mono); font-size: 11px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; }
+.tag-use_ai          { background: rgba(77,166,245,0.14);  color: #8EC4FB; }
+.tag-code_with_ai    { background: rgba(139,125,217,0.14); color: #B5ACF0; }
+.tag-ml_fundamentals { background: rgba(63,191,127,0.14);  color: #6BE0A0; }
+.tag-deep_learning   { background: rgba(229,122,122,0.14); color: #F2A1A1; }
+.tag-data_science    { background: rgba(77,196,209,0.14);  color: #8AE0EA; }
+.tag-ai_tools        { background: rgba(245,184,62,0.14);  color: #F5CC6E; }
+.tag-agents          { background: rgba(217,123,184,0.14); color: #E89CCB; }
+.tag-ethics_ai       { background: rgba(139,153,184,0.14); color: #B3BDD1; }
+
+.badge { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; font-family: var(--font-mono); font-size: 11px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; border-radius: 999px; }
+.badge .dot { width: 6px; height: 6px; border-radius: 999px; }
+.badge-ok     { background: rgba(63,191,127,0.14); color: #6BE0A0; } .badge-ok .dot { background: #3FBF7F; }
+.badge-warn   { background: rgba(245,184,62,0.14); color: #F5CC6E; } .badge-warn .dot { background: #F5B83E; animation: pulse 2s infinite; }
+.badge-danger { background: rgba(226,85,85,0.14);  color: #F2867D; } .badge-danger .dot { background: #E25555; }
+
+@keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:0.4;} }
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--space-5); border-radius: 999px; }
+::-webkit-scrollbar-thumb:hover { background: var(--lunar-6); }
