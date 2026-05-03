@@ -20,7 +20,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <main style={{ flex: 1 }}>{children}</main>
             <footer style={{ textAlign: 'center', padding: '48px 32px', marginTop: 'auto', fontFamily: 'var(--font-mono)', fontSize: 11, letterSpacing: '0.1em', color: 'var(--lunar-6)' }}>
               <a href="https://www.linkedin.com/in/yesicavenialgo/" target="_blank" rel="noopener noreferrer" style={{ color: 'inherit', textDecoration: 'none' }}>
-                yesicavenialgo
+                Ye
               </a>
             </footer>
           </div>
