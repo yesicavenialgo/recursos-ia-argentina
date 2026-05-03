@@ -59,7 +59,7 @@ make test             # correr tests
 | Componente | Servicio | Notas |
 |---|---|---|
 | Frontend | Vercel | Deploy automático desde GitHub |
-| Backend + DB | AWS EC2 t2.micro |  |
+| Backend + DB | AWS EC2 t3.micro |  |
 | Base de datos | PostgreSQL en Docker | Volumen EBS persistente |
 | Almacenamiento de archivos | — | No aplica (solo se guardan URLs) |
 
@@ -89,28 +89,39 @@ NEXTAUTH_SECRET=<secret-aleatorio>
 ### Primer deploy en EC2
 
 ```bash
-# 1. Instalar Docker en la instancia
+# 1. Instalar dependencias
 sudo yum update -y
-sudo yum install docker -y
+sudo yum install git docker -y
 sudo service docker start
 sudo usermod -aG docker ec2-user
+# cerrar sesión SSH y volver a conectar para que tome efecto
 
 # 2. Instalar Docker Compose
 sudo curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 sudo chmod +x /usr/local/bin/docker-compose
 
-# 3. Clonar el repositorio
+# 3. Instalar Docker Buildx (requerido en Amazon Linux 2023)
+sudo mkdir -p /usr/local/lib/docker/cli-plugins
+sudo curl -SL "https://github.com/docker/buildx/releases/download/v0.17.1/buildx-v0.17.1.linux-amd64" -o /usr/local/lib/docker/cli-plugins/docker-buildx
+sudo chmod +x /usr/local/lib/docker/cli-plugins/docker-buildx
+
+# 4. Agregar clave SSH de la instancia a GitHub (para repos privados)
+ssh-keygen -t ed25519 -C "tu@email.com"
+ssh-keyscan github.com >> ~/.ssh/known_hosts
+cat ~/.ssh/id_ed25519.pub  # copiar y agregar en GitHub → Settings → SSH keys
+
+# 5. Clonar el repositorio
 git clone <url-del-repo>
 cd cursosapp/backend
 
-# 4. Configurar variables de entorno
+# 6. Configurar variables de entorno
 cp .env.example .env
 # editar .env con los valores de producción
 
-# 5. Levantar servicios
-docker compose up --build -d
+# 7. Levantar servicios
+docker-compose up --build -d
 
-# 6. Migraciones y superusuario
+# 8. Migraciones y superusuario
 make migrate
 make superuser
 ```
