@@ -58,8 +58,8 @@ make test             # correr tests
 
 | Componente | Servicio | Notas |
 |---|---|---|
-| Frontend | Vercel (free tier) | Deploy automático desde GitHub |
-| Backend + DB | AWS EC2 t2.micro | Free tier (12 meses) |
+| Frontend | Vercel | Deploy automático desde GitHub |
+| Backend + DB | AWS EC2 t2.micro |  |
 | Base de datos | PostgreSQL en Docker | Volumen EBS persistente |
 | Almacenamiento de archivos | — | No aplica (solo se guardan URLs) |
 
