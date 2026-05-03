@@ -58,7 +58,7 @@ export default function HomePage() {
   return (
     <>
       {/* Hero */}
-      <section style={{ position: 'relative', overflow: 'hidden', padding: '80px 32px 48px', borderBottom: '1px solid var(--border)' }}>
+      <section style={{ position: 'relative', overflow: 'hidden', padding: '80px 32px 48px' }}>
         <div style={{ position: 'relative', zIndex: 1, maxWidth: 1200, margin: '0 auto' }}>
           <div className="eyebrow" style={{ marginBottom: 14, display: 'inline-flex', alignItems: 'center', gap: 10 }}>
             <span style={{ width: 24, height: 1, background: 'var(--signal-400)', display: 'inline-block' }} />
@@ -87,19 +87,12 @@ export default function HomePage() {
             </div>
           </form>
 
-          <div style={{ display: 'flex', gap: 36, marginTop: 28 }}>
-            {[['25+', 'cursos'], ['100%', 'gratis'], ['2', 'idiomas']].map(([v, k]) => (
-              <div key={k}>
-                <div style={{ fontFamily: 'var(--font-mono)', fontSize: 22, fontWeight: 500, color: 'var(--fg)' }}>{v}</div>
-                <div style={{ fontFamily: 'var(--font-mono)', fontSize: 10, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--lunar-5)' }}>{k}</div>
-              </div>
-            ))}
-          </div>
         </div>
       </section>
 
       {/* Content */}
-      <div style={{ maxWidth: 1200, margin: '0 auto', padding: '40px 32px 80px' }}>
+      <div style={{ padding: '40px 32px 80px' }}>
+      <div style={{ maxWidth: 1200, margin: '0 auto' }}>
         {/* Filters */}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 24, flexWrap: 'wrap', gap: 12 }}>
           <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', alignItems: 'center' }}>
@@ -146,7 +139,7 @@ export default function HomePage() {
           <div style={{ textAlign: 'center', padding: 80, color: 'var(--lunar-5)', fontFamily: 'var(--font-mono)', fontSize: 12, letterSpacing: '0.1em' }}>
             CARGANDO...
           </div>
-        ) : items.length === 0 ? (
+        ) : items.length === 0 && (filters.language || filters.level || filters.category || filters.search) ? (
           <div style={{ textAlign: 'center', padding: 80, color: 'var(--lunar-5)' }}>
             <div style={{ fontFamily: 'var(--font-display)', fontSize: 22, fontWeight: 600, color: 'var(--fg)', marginBottom: 6 }}>Sin resultados</div>
             <p style={{ fontSize: 14 }}>Probá con otros filtros o términos de búsqueda.</p>
@@ -156,6 +149,7 @@ export default function HomePage() {
             {items.map((course) => <CourseCard key={course.id} course={course} />)}
           </div>
         )}
+      </div>
       </div>
     </>
   )

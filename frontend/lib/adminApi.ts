@@ -16,8 +16,8 @@ adminApi.interceptors.request.use((config) => {
   return config
 })
 
-export const adminLogin = (email: string, password: string) =>
-  adminApi.post('/api/admin/auth/login/', { email, password }).then((r) => r.data)
+export const adminLogin = (username: string, password: string) =>
+  adminApi.post('/api/admin/auth/login/', { username, password }).then((r) => r.data)
 
 export const fetchAdminCourses = (): Promise<Course[]> =>
   adminApi.get('/api/admin/courses/').then((r) => r.data.results ?? r.data)

@@ -1,7 +1,18 @@
 'use client'
 import Link from 'next/link'
+import { usePathname, useRouter } from 'next/navigation'
+import { useEffect, useState } from 'react'
 
 export default function Header() {
+  const pathname = usePathname()
+  const router = useRouter()
+  const isAdmin = pathname.startsWith('/admin')
+  const [isAdminLogged, setIsAdminLogged] = useState(false)
+
+  useEffect(() => {
+    setIsAdminLogged(!!localStorage.getItem('admin_tokens'))
+  }, [pathname])
+
   return (
     <header style={{
       position: 'sticky', top: 0, zIndex: 50,
@@ -31,12 +42,32 @@ export default function Header() {
       </Link>
 
       <nav style={{ display: 'flex', alignItems: 'center', gap: 6, marginLeft: 'auto' }}>
-        <Link href="/suggest" style={{
-          padding: '8px 16px', borderRadius: 8, fontSize: 14, fontWeight: 500,
-          background: 'var(--signal-400)', color: '#06142B', textDecoration: 'none',
-        }}>
-          + Agregar curso
-        </Link>
+        {isAdminLogged && (
+          <>
+            {!isAdmin && (
+              <Link href="/admin/dashboard" style={{
+                padding: '8px 16px', borderRadius: 8, fontSize: 14, fontWeight: 500,
+                background: 'var(--space-4)', color: 'var(--fg)', border: '1px solid var(--border)', textDecoration: 'none',
+              }}>
+                Panel de control
+              </Link>
+            )}
+            <button onClick={() => { localStorage.removeItem('admin_tokens'); setIsAdminLogged(false); router.push('/') }} style={{
+              padding: '8px 16px', borderRadius: 8, fontSize: 14, fontWeight: 500,
+              background: 'rgba(226,85,85,0.12)', color: '#F2867D', border: '1px solid rgba(226,85,85,0.3)', cursor: 'pointer',
+            }}>
+              Cerrar sesión
+            </button>
+          </>
+        )}
+        {!isAdmin && pathname !== '/suggest' && (
+          <Link href="/suggest" style={{
+            padding: '8px 16px', borderRadius: 8, fontSize: 14, fontWeight: 500,
+            background: 'var(--signal-400)', color: '#06142B', textDecoration: 'none',
+          }}>
+            + Agregar curso
+          </Link>
+        )}
       </nav>
     </header>
   )

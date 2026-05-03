@@ -1,6 +1,8 @@
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 from django.utils import timezone
+from django.utils.decorators import method_decorator
+from django_ratelimit.decorators import ratelimit
 from rest_framework import viewsets, permissions, status
 from rest_framework.views import APIView
 from rest_framework.decorators import action
@@ -20,8 +22,9 @@ class IsAdminUser(permissions.BasePermission):
 class AdminLoginView(APIView):
     permission_classes = [permissions.AllowAny]
 
+    @method_decorator(ratelimit(key='ip', rate='5/m', method='POST', block=True))
     def post(self, request):
-        user = authenticate(username=request.data.get('email'), password=request.data.get('password'))
+        user = authenticate(username=request.data.get('username'), password=request.data.get('password'))
         if not user or not user.is_staff:
             return Response({'detail': 'Acceso denegado.'}, status=status.HTTP_401_UNAUTHORIZED)
         refresh = RefreshToken.for_user(user)

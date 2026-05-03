@@ -27,13 +27,14 @@ superuser:
 test:
 	$(DC) exec api python manage.py test apps --verbosity=2
 
-loaddata:
-	$(DC) exec api python manage.py loaddata fixtures/initial_courses.json
+seed:
+	$(DC) exec api python manage.py shell < seed.py
 
 resetdb:
 	$(DC) down -v
+	rm -f db.sqlite3
 	$(DC) up -d db
 	sleep 3
 	$(DC) exec api python manage.py migrate
 
-.PHONY: up build down logs shell migrate makemigrations superuser test loaddata resetdb
+.PHONY: up build down logs shell migrate makemigrations superuser test seed resetdb

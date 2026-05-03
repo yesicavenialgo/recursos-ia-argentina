@@ -59,7 +59,7 @@ export default function SuggestPage() {
         Sugerí un curso
       </h1>
       <p className="text-[var(--lunar-4)] text-[15px] mb-8">
-        Compartí un recurso gratuito de IA con la comunidad. Lo revisamos y si es bueno lo publicamos.
+        Compartí un recurso gratuito de IA con la comunidad. Lo revisamos y lo publicamos.
       </p>
 
       {error && (

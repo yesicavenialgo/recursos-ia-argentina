@@ -5,7 +5,7 @@ import { adminLogin } from '@/lib/adminApi'
 
 export default function AdminLoginPage() {
   const router = useRouter()
-  const [email, setEmail] = useState('')
+  const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
@@ -14,7 +14,7 @@ export default function AdminLoginPage() {
     e.preventDefault()
     setLoading(true); setError('')
     try {
-      const data = await adminLogin(email, password)
+      const data = await adminLogin(username, password)
       localStorage.setItem('admin_tokens', JSON.stringify({ access: data.access, refresh: data.refresh }))
       router.push('/admin/dashboard')
     } catch {
@@ -43,8 +43,8 @@ export default function AdminLoginPage() {
 
         <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
-            <label style={labelStyle}>Email</label>
-            <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required style={inputStyle} />
+            <label style={labelStyle}>Usuario</label>
+            <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} required style={inputStyle} />
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
             <label style={labelStyle}>Contraseña</label>
