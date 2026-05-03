@@ -45,7 +45,7 @@ export default function SuggestPage() {
         <p className="text-[var(--lunar-4)] text-[15px] mb-8">
           Lo revisamos y si cumple los criterios lo publicamos en el directorio.
         </p>
-        <button onClick={() => setSubmitted(false)} style={{ padding: '8px 16px', borderRadius: 8, fontSize: 14, fontWeight: 500, background: 'var(--signal-400)', color: '#06142B', border: 0, cursor: 'pointer' }}>
+        <button onClick={() => { setSubmitted(false); setForm({ title: '', platform: '', url: '', description: '', language: 'es', level: 'beginner', category: 'use_ai' }) }} style={{ padding: '8px 16px', borderRadius: 8, fontSize: 14, fontWeight: 500, background: 'var(--signal-400)', color: '#06142B', border: 0, cursor: 'pointer' }}>
           Agregar otro
         </button>
       </div>
