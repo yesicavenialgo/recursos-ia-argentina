@@ -48,6 +48,7 @@ npm run dev
 |----------|-------------|
 | `NEXT_PUBLIC_API_URL` | URL del backend (ej: `http://localhost:8000`) |
 | `NEXTAUTH_URL` | URL del frontend |
+| `NEXTAUTH_SECRET` | Secret para NextAuth (string aleatorio seguro) |
 
 ## Docker
 
